@@ -1,4 +1,4 @@
-# recycle-mapping
+# Recycle Mapping
 
 > Em breve um sistema Web que auxiliará no mapeamento de cooperativas de reciclagem da cidade de Campinas
 > 
