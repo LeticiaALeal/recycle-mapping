@@ -2,9 +2,8 @@ import React from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import Leaflet from "leaflet";
 import mapPin from '../../../assets/icon-reciclage.svg';
-import { db } from '../../../data/Firebase';
 import { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore'
+import { getCooperativas } from '../../../data/commands/Cooperativas';
 import './Mapa.css';
 import 'leaflet/dist/leaflet.css';
 
@@ -15,40 +14,16 @@ const mapPinIcon = Leaflet.icon({
     iconSize: [20, 68],
     });
 
-    function getReferanceData(getList, ref){ 
-        return getList.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-        .find(it => it.id === ref)
-    }     
 
 export default function Mapa() {
 
     const [cooperativas, setCooperativas] = useState([]);
-    const cooperativasCollectionRef = collection(db, "cooperativa");
-    const enderecoCollectionRef = collection(db, "endereco");
-    const bairroCollectionRef = collection(db, "bairro");
 
     useEffect(() => {
-        const getCooperativas = async () => {
-            const getCooperativas = await getDocs(cooperativasCollectionRef)
-            const getEndereco = await getDocs(enderecoCollectionRef)
-            const getBairro = await getDocs(bairroCollectionRef)
-
-            const cooperativasList = getCooperativas.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-           
-                const cooperativaObject = cooperativasList.map(it => {
-                    const endereco = getReferanceData(getEndereco, it.idEndereco.id);
-                    return it = {
-                        nome: it.nome,
-                        latitude: it.latitude,
-                        longitude: it.longitude,                        
-                        rua: endereco.rua,
-                        bairro: getReferanceData(getBairro, endereco.idBairro.id).bairro,
-                        numero: endereco.numero
-                    }});
-            
-            setCooperativas(cooperativaObject);
+        const listCooperativas = async () => {    
+            setCooperativas(await getCooperativas());
         };
-        getCooperativas();
+        listCooperativas();
     }, []);
 
     return (
@@ -66,6 +41,7 @@ export default function Mapa() {
                 {cooperativas.map(item => (
                     <Marker position={[item.latitude, item.longitude]} icon={mapPinIcon}>
                     <Popup>
+                    {<img src={item.foto} alt="foto da cooperativa" height="150px" width="250px" />}<br />
                     {"Cooperativa "+ item.nome}<br />
                     {item.rua + ", "} {item.numero}<br />
                     {item.bairro}<br />
