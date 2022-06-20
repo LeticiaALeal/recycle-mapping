@@ -4,7 +4,7 @@ import Leaflet from "leaflet";
 import mapPin from '../../../assets/icon-reciclage.svg';
 import { useState, useEffect } from 'react';
 import { getCooperativas } from '../../../data/commands/Cooperativas';
-import './Mapa.css';
+import './Mapa.scss';
 import 'leaflet/dist/leaflet.css';
 
 const center = [-22.91071603221728, -47.06278987880873];
@@ -16,7 +16,6 @@ const mapPinIcon = Leaflet.icon({
 
 
 export default function Mapa() {
-
     const [cooperativas, setCooperativas] = useState([]);
 
     useEffect(() => {

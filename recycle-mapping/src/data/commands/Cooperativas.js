@@ -28,6 +28,10 @@ const getCooperativas = async () => {
             rua: endereco.rua,
             bairro: getReferanceData(getBairro, endereco.idBairro.id).bairro,
             numero: endereco.numero,
+            inicio: it.dataInicio,
+            colaboradores: it.qtdColaboradores,
+            rejeitos: it.qtdRejeitos,
+            triagem: it.qtdTriagem,
             foto: it.foto
         }});
 }
