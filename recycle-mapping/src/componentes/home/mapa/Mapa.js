@@ -2,10 +2,9 @@ import React from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import Leaflet from "leaflet";
 import mapPin from '../../../assets/icon-reciclage.svg';
-import { db } from '../../../data/Firebase';
 import { useState, useEffect } from 'react';
-import { collection, doc, getDocs } from 'firebase/firestore'
-import './Mapa.css';
+import { getCooperativas } from '../../../data/commands/Cooperativas';
+import './Mapa.scss';
 import 'leaflet/dist/leaflet.css';
 
 const center = [-22.91071603221728, -47.06278987880873];
@@ -15,17 +14,15 @@ const mapPinIcon = Leaflet.icon({
     iconSize: [20, 68],
     });
 
-export default function Mapa() {
 
+export default function Mapa() {
     const [cooperativas, setCooperativas] = useState([]);
-    const cooperativasCollectionRef = collection(db, "cooperativa");
 
     useEffect(() => {
-        const getCooperativas = async () => {
-            const data = await getDocs(cooperativasCollectionRef);
-            setCooperativas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        const listCooperativas = async () => {    
+            setCooperativas(await getCooperativas());
         };
-        getCooperativas();
+        listCooperativas();
     }, []);
 
     return (
@@ -43,7 +40,10 @@ export default function Mapa() {
                 {cooperativas.map(item => (
                     <Marker position={[item.latitude, item.longitude]} icon={mapPinIcon}>
                     <Popup>
-                    {item.nome}
+                    {<img src={item.foto} alt="foto da cooperativa" height="150px" width="250px" />}<br />
+                    {"Cooperativa "+ item.nome}<br />
+                    {item.rua + ", "} {item.numero}<br />
+                    {item.bairro}<br />
                     </Popup>
                     </Marker>
                 ))}

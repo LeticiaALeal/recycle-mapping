@@ -1,0 +1,24 @@
+.menu {
+    display: flex;
+    padding: 20px 250px;;
+
+    &__list {
+      align-items: center;
+      display: flex;
+    }
+    &__link {
+      list-style-type: none;
+      padding: 0 20px;
+      a {
+        color: #242536;
+        cursor: pointer;
+        font-size: 24px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: .2s ease;
+        &:hover {
+          color: #92929d;
+        }
+      }
+    }
+  }
