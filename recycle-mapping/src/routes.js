@@ -4,6 +4,7 @@ import Sobre from './componentes/sobre/Sobre';
 import Detalhes from './componentes/detalhes/Detalhes';
 import Cooperativas from './componentes/cooperativas/Cooperativas';
 import Menu from './componentes/menu/Menu';
+import Rodape from './componentes/rodape/Rodape';
 
 export default function AppRouter(){
     return (
@@ -16,6 +17,7 @@ export default function AppRouter(){
                     <Route path='/cooperativas' element={<Cooperativas/>}/>
                     <Route path='/sobre' element={<Sobre />}/>
                 </Routes>
+                <Rodape/>
             </Router>
         </main>
     );
