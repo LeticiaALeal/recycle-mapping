@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Roboto+Condensed:wght@300&display=swap');
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.imagem {
+  width: 600px;
+  img {
+    border-radius: 8px;
+    width: 100%;
+  }
+}
+.description {
+  width: 600px;
+  background-color:aquamarine;
+  h2 {
+    color: YellowGreen;
+    font-family: 'Courier New', Courier, monospace;
+    margin-left: 2%;
+
+  }
+  p {
+    font-family: 'Josefin Sans', sans-serif;
+    height: 20px;
+    color: #92929d;
+  }
+  .icon {
+    height: 25px;
+    width: 25px;
+    margin-right: 2%;
+    margin-left: 2%;
+  }
+}
