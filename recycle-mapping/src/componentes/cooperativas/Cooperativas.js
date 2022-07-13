@@ -24,6 +24,7 @@ export default function Cooperativas () {
     return (
     <section className="secao">
         <input 
+        type='search'
          value={busca}
          onChange={(evento) => setBusca(evento.target.value)}
          placeholder="Buscar"/>
