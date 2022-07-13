@@ -1,9 +1,9 @@
-import { db } from './../../../data/Firebase';
-import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'
+import { db } from '../../../data/Firebase';
+import { collection, getDocs} from 'firebase/firestore'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Remocao(){
+export default function Atualizacao(){
     const [cooperativas, setCooperativas] = useState([]);
     const cooperativasCollectionRef = collection(db, "cooperativas");
     const navigate = useNavigate();
@@ -17,11 +17,6 @@ export default function Remocao(){
         dadosCooperativas();
     }, []);
 
-    const deleteDocument = async (id) => {
-        await deleteDoc(doc(db, 'cooperativas', id))
-    }
-
-
     return (
         <section className="secao">
         {cooperativas.map(cooperativa => (
@@ -30,10 +25,9 @@ export default function Remocao(){
                 <>
                     <div className="item__descricao">
                         <div className="item__titulo">
-                            <h2>{cooperativa.id}</h2>
-                            <p>{cooperativa.nome + " "}{ " - " + cooperativa.endereco}</p>
-                            <button onClick={() => deleteDocument(cooperativa.id)}>Deletar</button>
-                            <button onClick={() => navigate(`/administrador/cadastro`, {cooperativa:cooperativa} )}>Editar</button>
+                            <h2>{cooperativa.nome}</h2>
+                            <p>{"Endereço: " + cooperativa.endereco}</p>
+                            <button onClick={() => navigate(`/administrador/cadastro`, {state: {cooperativa}} )}>Editar</button>
                         </div>
                     </div>
                 </> 

@@ -11,6 +11,12 @@ export default function Menu(){
       }, {
         label: 'Sobre',
         to: '/sobre'
+      },{
+        label: 'Administrador',
+        to: '/administrador/atualizacao'
+      }, {
+        label: 'Cadastro',
+        to: '/administrador/cadastro'
       }];
 
       return (
@@ -24,6 +30,7 @@ export default function Menu(){
             </li>
           ))}
         </ul>
+        {<Link to={'/administrador'}>Login</Link>}
       </nav>
       )
 

@@ -1,48 +1,38 @@
 import './Cadastro.scss';
 import { db } from '../../../data/Firebase';
-import { useState, useLocation } from 'react';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom'
 import { doc, setDoc } from 'firebase/firestore';
 
-export default function Cadastro(Props){
-  //const {state} = useLocation();
+export default function Cadastro(){
+  var {state} = useLocation();
   const [cooperativa, setCooperativa] = useState({
-    nome: '' ,
-    endereco: '',
-    latitude: '',
-    longitude: '',
-    qtdColaboradores: '',
-    qtdRejeitos: '',
-    qtdTriagem: ''
+    nome: state === null ? '' : state.cooperativa.nome,
+    endereco: state === null ? '' : state.cooperativa.endereco,
+    latitude: state === null ? '' : state.cooperativa.latitude,
+    longitude: state === null ? '' : state.cooperativa.longitude,
+    qtdColaboradores: state === null ? '' : state.cooperativa.qtdColaboradores,
+    qtdRejeitos: state === null ? '' : state.cooperativa.qtdRejeitos,
+    qtdTriagem: state === null ? '' : state.cooperativa.qtdTriagem,
+    status: state === null ? true : state.cooperativa.status
   });
 
-  console.log(Props.location)
-  //console.log(state)
+  const navigate = useNavigate();
 
-  const [status, setStatus] = useState({
-    type:'',
-    messagem:''
-  });
-
-  const documento = cooperativa.nome + Math.random();
-
-  const submit = async (e) => {
+  const submit = (e) => {
     e.preventDefault();
     
-    await setDoc(doc(db, 'cooperativas', documento), {
+     setDoc(doc(db, 'cooperativas', state === null ? String(Math.random()) : state.cooperativa.id), {
       nome: cooperativa.nome,
       endereco: cooperativa.endereco,
       latitude: cooperativa.latitude,
       longitude: cooperativa.longitude,
       qtdColaboradores: cooperativa.qtdColaboradores,
       qtdRejeitos: cooperativa.qtdRejeitos,
-      qtdTriagem: cooperativa.qtdTriagem
+      qtdTriagem: cooperativa.qtdTriagem,
+      status: cooperativa.status
       })
       .then(function() {
-        setStatus({
-          type: "Sucesso",
-          messagem: "Cooperativa cadastrada com sucesso!"
-        });
-
         setCooperativa({
           nome: '',
           endereco: '',
@@ -50,18 +40,14 @@ export default function Cadastro(Props){
           longitude: '',
           qtdColaboradores: '',
           qtdRejeitos: '',
-          qtdTriagem: ''
+          qtdTriagem: '',
+          status: true
         });
-
-        alert(status.messagem);
+        alert("Atualização inserida com sucesso!");
+        navigate(`/administrador/atualizacao`);
       })
       .catch(function(e) {
-        setStatus({
-          type: "Erro",
-          messagem: "Erro no cadastro " + e
-        });
-
-        alert(status.messagem);
+        alert("Erro na atualização: " + e.messagem);
       });
     };
 
@@ -75,12 +61,6 @@ export default function Cadastro(Props){
               <input className='input-texto' 
               type="text" name="nome" id="nome" required 
               value={cooperativa.nome} onChange={valueInput}/>    
-            </div>
-            <div className="container-cadastro">
-              <label>Identificação </label>
-              <input className='input-texto' 
-              type="text" name="id" id="id" 
-              value={documento} disabled/>    
             </div>
             <div className="container-cadastro">
               <label>Endereço </label>
@@ -117,6 +97,14 @@ export default function Cadastro(Props){
               <input className='input-texto' 
               type="text" name="qtdTriagem" required 
               value={cooperativa.qtdTriagem} onChange={valueInput}/> 
+            </div>
+            <div className="container-cadastro">
+            <label>Status </label>
+            <select className='input-texto' id="status" name="status" 
+            value={cooperativa.status} onChange={valueInput}>
+              <option value={true}>Ativa</option>
+              <option value={false}>Inativa</option>
+            </select>
             </div>
             {/* <div className="container-cadastro">
               <label>Foto </label>
