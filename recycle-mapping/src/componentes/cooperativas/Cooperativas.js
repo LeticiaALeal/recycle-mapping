@@ -5,17 +5,29 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Cooperativas () {
     const [cooperativas, setCooperativas] = useState([]);
+    const [busca, setBusca] = useState("");
     const navigate = useNavigate();
+
+    function executaBusca(title){
+        const regex = new RegExp(busca, 'i');
+        return regex.test(title);
+    }
 
     useEffect(() => {
         const dadosCooperativas = async () => {   
-            setCooperativas(await getCooperativas());
+            const cooperativasList = await (await getCooperativas()).filter(item => executaBusca(item.nome));
+            setCooperativas(cooperativasList);
         };
         dadosCooperativas();
     }, []);
 
     return (
-    <section className="teste">
+    <section className="secao">
+        <input 
+        type='search'
+         value={busca}
+         onChange={(evento) => setBusca(evento.target.value)}
+         placeholder="Buscar"/>
         {cooperativas.map(cooperativa => (
             <div className="item"
             onClick={() => navigate(`/cooperativa/${cooperativa.id}`)}
