@@ -8,13 +8,12 @@ import Rodape from './componentes/rodape/Rodape';
 import Login from './componentes/Administrador/login/Login';
 import Cadastro from './componentes/Administrador/cadastro/Cadastro';
 import Atualizacao from './componentes/Administrador/atualizacao/Atualizacao';
-
+  
 export default function AppRouter(){
     return (
         <main>
             <Router>
-                {'a' === 'a' ?
-            <Menu /> : null}
+            <Menu/>
                 <Routes>
                     <Route path='/' element={<Home />}/>
                     <Route path='/cooperativa/:id' element={<Detalhes/>}/>
@@ -22,10 +21,10 @@ export default function AppRouter(){
                     <Route path='/sobre' element={<Sobre />}/>
                     <Route path='/administrador' element={<Login/>}/>
                     <Route path='/administrador/cadastro' element={<Cadastro/>}/>
-                    <Route path='/administrador/atualizacao' element={<Atualizacao/>}/>
+                    <Route path='/administrador/atualizacao' element={<Atualizacao/>}/> 
                 </Routes>
                 <Rodape/>
-            </Router>
+            </Router>            
         </main>
     );
 }
