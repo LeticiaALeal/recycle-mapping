@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Atualizacao(){
+    if (!sessionStorage.getItem('autenticado')) window.location = '/';
+    
     const [cooperativas, setCooperativas] = useState([]);
     const cooperativasCollectionRef = collection(db, "cooperativas");
     const navigate = useNavigate();

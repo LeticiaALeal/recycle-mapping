@@ -19,7 +19,7 @@ export default function Cooperativas () {
             setCooperativas(cooperativasList);
         };
         dadosCooperativas();
-    }, []);
+    }, [busca]);
 
     return (
     <section className="secao">
