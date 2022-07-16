@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
     const [form, setForm] = useState({
         email:'',
         senha:''
@@ -11,11 +11,13 @@ const Login = () => {
 
       const auth = getAuth();
       const navigate = useNavigate();
-    
+
       function handleSubmit (){
         signInWithEmailAndPassword(auth, form.email, form.senha)
           .then(
-            navigate(`/administrador/cadastro`)
+            sessionStorage.setItem('autenticado', true), 
+            //navigate(`/administrador/atualizacao`),  
+                               
           )
           .catch((error) => {
             const errorCode = error.code;

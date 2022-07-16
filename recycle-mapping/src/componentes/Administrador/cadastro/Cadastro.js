@@ -1,10 +1,16 @@
 import './Cadastro.scss';
-import { db } from '../../../data/Firebase';
+import { db, storage } from '../../../data/Firebase';
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function Cadastro(){
+  
+  if (!sessionStorage.getItem('autenticado')) window.location = '/';
+
+  const navigate = useNavigate();
+
   var {state} = useLocation();
   const [cooperativa, setCooperativa] = useState({
     nome: state === null ? '' : state.cooperativa.nome,
@@ -14,14 +20,25 @@ export default function Cadastro(){
     qtdColaboradores: state === null ? '' : state.cooperativa.qtdColaboradores,
     qtdRejeitos: state === null ? '' : state.cooperativa.qtdRejeitos,
     qtdTriagem: state === null ? '' : state.cooperativa.qtdTriagem,
-    status: state === null ? true : state.cooperativa.status
+    status: state === null ? true : state.cooperativa.status,
+    foto: state === null ? '' : state.cooperativa.foto
   });
 
-  const navigate = useNavigate();
+  const [imagem, setImagem] = useState();
 
   const submit = (e) => {
     e.preventDefault();
-    
+
+    uploadBytes(ref(storage, imagem.name), imagem)
+    .catch(() => {
+      alert("Erro ao salvar imagem: " + e.messagem);
+    });
+
+    // getDownloadURL(ref(storage, imagem.name))
+    // .then((url) => {
+    //   console.log(url);
+    // });
+
      setDoc(doc(db, 'cooperativas', state === null ? String(Math.random()) : state.cooperativa.id), {
       nome: cooperativa.nome,
       endereco: cooperativa.endereco,
@@ -30,7 +47,8 @@ export default function Cadastro(){
       qtdColaboradores: cooperativa.qtdColaboradores,
       qtdRejeitos: cooperativa.qtdRejeitos,
       qtdTriagem: cooperativa.qtdTriagem,
-      status: cooperativa.status
+      status: cooperativa.status,
+      foto: ""
       })
       .then(function() {
         setCooperativa({
@@ -41,7 +59,8 @@ export default function Cadastro(){
           qtdColaboradores: '',
           qtdRejeitos: '',
           qtdTriagem: '',
-          status: true
+          status: true,
+          foto: ''
         });
         alert("Atualização inserida com sucesso!");
         navigate(`/administrador/atualizacao`);
@@ -106,10 +125,12 @@ export default function Cadastro(){
               <option value={false}>Inativa</option>
             </select>
             </div>
-            {/* <div className="container-cadastro">
+            <div className="container-cadastro">
               <label>Foto </label>
-              <input className='input-texto' type="file" name="foto" accept="image/png, image/jpeg" required /> 
-            </div> */}
+              <input className='input-texto' type="file" name="foto" 
+              accept="image/png, image/jpeg" required 
+              onChange={(e) => setImagem(e.target.files[0])}/> 
+            </div>
             <div className="botao-container">
               <input className='input-texto' type="submit" onClick={submit}/>
             </div>
