@@ -7,20 +7,26 @@ import calendario from '../../assets/icon-calendar.png';
 import reciclagem from '../../assets/icon-simbolo-de-reciclagem.png';
 import lixo from '../../assets/icon-lixo.png';
 import pessoas from '../../assets/icon-pessoas.png';
+import { PulseLoader } from 'react-spinners';
 
 export default function Detalhes () {
     const { id } = useParams();
     const [cooperativa, setCooperativa] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const dadosCooperativa = async () => {   
             setCooperativa((await getCooperativas()).find(item => item.id === id));
+            setTimeout(() => {
+                setIsLoading(false);
+              }, 1500);
         };
         dadosCooperativa();
     }, []);
 
     return (
         <div>
+        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={50}/> :
             <section className="container">
                 <div className="imagem">
                     <img src={cooperativa.foto} alt={"cooperativa " + cooperativa.nome}/>
@@ -45,6 +51,7 @@ export default function Detalhes () {
                 </div>
                 <div className='regioes'>teste</div>
             </section> 
+        }
        </div>
        
     )

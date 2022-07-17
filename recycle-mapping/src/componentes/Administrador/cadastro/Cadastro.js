@@ -1,6 +1,6 @@
 import './Cadastro.scss';
 import { db, storage } from '../../../data/Firebase';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
