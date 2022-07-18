@@ -6,6 +6,7 @@
       margin-bottom: 30px;
       margin-right: 200px;
       margin-left: 200px;
+      margin-top: 40px;
   }
 
 .item {
@@ -52,4 +53,25 @@
         font-family: 'Josefin Sans', sans-serif;
       }
     }
+  }
+  .loader {  
+        left:50%;
+        top:50%;
+        position: relative;
+        margin-left:-40px; 
+        margin-top: 400px; 
+        height: 600px;
+  }
+  .busca {
+    height: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 350px;
+    font-size: 18px;
+    display: flex;
+    //float: right;
+    margin-bottom: 2%;
+    margin-top: -3%;
+    position: absolute;
+    margin-left: 100rem;
   }
