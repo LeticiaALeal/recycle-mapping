@@ -1,5 +1,7 @@
 import './Menu.scss'
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo-1.png';
+import campinas from '../../assets/campinas00.jpg';
 
 export default function Menu(props){
 
@@ -41,15 +43,21 @@ export default function Menu(props){
       }
 
       return (
-        <nav className="menu">
+        <div>
+          <img className='campinas' src={campinas} alt="campinas"/>
+           <nav className="menu">
+          <img className='logo' src={logo} alt="logo"/>
         <ul className="menu__list">
           {mapMenu()}
         </ul>
         { !isAuth ?
           <Link to={'/administrador'}>Login</Link> :
           <a href="/" onClick={deslogar}>Deslogar</a>    
-        }
+        } 
       </nav>
+        </div>
+        
+        
       )
 
 }

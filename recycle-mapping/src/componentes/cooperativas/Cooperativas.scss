@@ -6,6 +6,7 @@
       margin-bottom: 30px;
       margin-right: 200px;
       margin-left: 200px;
+      margin-top: 40px;
   }
 
 .item {
@@ -59,6 +60,7 @@
         position: relative;
         margin-left:-40px; 
         margin-top: 400px; 
+        height: 600px;
   }
   .busca {
     height: 50px;
@@ -67,7 +69,9 @@
     width: 350px;
     font-size: 18px;
     display: flex;
-    float: right;
+    //float: right;
     margin-bottom: 2%;
-    margin-top: 0%;
+    margin-top: -3%;
+    position: absolute;
+    margin-left: 100rem;
   }
