@@ -3,6 +3,7 @@ import { collection, getDocs} from 'firebase/firestore'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PulseLoader } from 'react-spinners';
+import './Atualizacao.scss';
 
 export default function Atualizacao(){
     if (!sessionStorage.getItem('autenticado')) window.location = '/';
@@ -27,7 +28,7 @@ export default function Atualizacao(){
     return (
         <>
         {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={50}/> : 
-            <section className="secao">
+            <section className="secaoAdm">
             {cooperativas.map(cooperativa => (
             
                 <div className="item" >
@@ -36,7 +37,7 @@ export default function Atualizacao(){
                             <div className="item__titulo">
                                 <h2>{cooperativa.nome}</h2>
                                 <p>{"Endereço: " + cooperativa.endereco}</p>
-                                <button onClick={() => navigate(`/administrador/cadastro`, {state: {cooperativa}} )}>Editar</button>
+                                <button className='editar' onClick={() => navigate(`/administrador/cadastro`, {state: {cooperativa}} )}>Editar</button>
                             </div>
                         </div>
                     </> 

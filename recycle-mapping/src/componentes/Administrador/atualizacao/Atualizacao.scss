@@ -1,4 +1,4 @@
-.secao {
+.secaoAdm {
     align-items: center;
     display: block;
     flex-wrap: wrap;
@@ -6,6 +6,8 @@
     margin-bottom: 30px;
     margin-right: 200px;
     margin-left: 200px;
+    margin-top: 40px;
+    height: 50rem;
 }
 .item {
   align-items: center;
@@ -52,3 +54,16 @@
     }
   }
 }
+  .editar{
+    cursor: pointer;
+    font-size: 20px;
+    background: #01d28e;
+    border: 1px solid #01d28e;
+    color: #fff;
+    border-radius: 10px;
+    width: 100px;
+    &:hover {
+      background: #6cf0c2;
+    }
+}
+

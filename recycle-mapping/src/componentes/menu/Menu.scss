@@ -1,7 +1,7 @@
 .menu {
     display: flex;
-    padding: 20px 250px;
-    width: 500px;
+    padding: 10px 250px;
+    background-color: #b0c146;
 
     &__list {
       align-items: center;
@@ -11,14 +11,14 @@
       list-style-type: none;
       padding: 0 20px;
       a {
-        color: #242536;
+        color: WHITE;
         cursor: pointer;
         font-size: 24px;
         font-weight: 600;
         text-decoration: none;
         transition: .2s ease;
         &:hover {
-          color: #92929d;  
+          color: #2C5B1D;  
         }
       }
     }

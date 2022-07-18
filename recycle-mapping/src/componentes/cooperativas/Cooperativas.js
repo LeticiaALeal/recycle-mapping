@@ -28,14 +28,15 @@ export default function Cooperativas () {
 
     return (
         <>
-        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={50} /> :
-            <section className="secao">
-            <input 
-            type='search'
+        <input 
+            type='text'
             className='busca'
             value={busca}
             onChange={(evento) => setBusca(evento.target.value)}
-            placeholder="Busca..."/>         
+            placeholder="Busca..."/>   
+            
+        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={50} /> :
+            <section className="secao">    
             {cooperativas.map(cooperativa => (
                 <div className="item"
                 onClick={() => navigate(`/cooperativa/${cooperativa.id}`)}
@@ -55,8 +56,7 @@ export default function Cooperativas () {
                 </div>   
             ))}
             </section>       
-        }  
-             
+        }              
         </>
      );
 
