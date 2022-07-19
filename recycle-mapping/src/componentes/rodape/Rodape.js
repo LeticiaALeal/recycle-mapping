@@ -1,5 +1,5 @@
 import './Rodape.scss';
-import logo from '../../assets/logo-1.png';
+import logo from '../../assets/logo-1-black.png';
 
 export default function Rodape(){
     return (

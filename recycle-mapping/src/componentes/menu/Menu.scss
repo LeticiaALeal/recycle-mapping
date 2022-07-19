@@ -12,6 +12,7 @@
       padding: 0 20px;
       a {
         color: WHITE;
+        font-family: 'Josefin Sans', sans-serif;
         cursor: pointer;
         font-size: 24px;
         font-weight: 600;
@@ -21,5 +22,20 @@
           color: #2C5B1D;  
         }
       }
+    }
+  }
+  .login {
+    color: WHITE;
+    text-decoration: none;
+    background-color: dimgray;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 17px;
+    height: 30px;
+    width: 80px;
+    padding-top: 10px;
+    text-align: center;
+    border-radius: 10px;
+    &:hover {
+      background-color:darkgray;  
     }
   }

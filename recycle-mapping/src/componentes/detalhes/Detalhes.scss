@@ -8,26 +8,29 @@
   margin-bottom: 400px;
   margin-top: 100px;
 }
-.imagem {
-  width: 600px;
+.imagemDetalhe {
+  width: 600px; 
   img {
     border-radius: 8px;
     width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 }
-.description {
+.descriptionDetalhe {
   background-color:white;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: absolute;
   left: 600px;
   width: 500px;
+  height: 380px;
   margin: 300px auto;
   h2 {
     color: YellowGreen;
     font-family: 'Courier New', Courier, monospace;
-    margin-left: 2%;
+    margin-left: 3%;
 
   }
   p {
@@ -35,7 +38,7 @@
     font-size: 20px;
     height: 8px;
     color: #92929d;
-    margin-left: 2%;
+    margin-left: 3%;
   }
   .icon {
     height: 25px;
