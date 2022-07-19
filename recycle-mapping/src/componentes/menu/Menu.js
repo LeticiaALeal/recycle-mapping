@@ -51,9 +51,10 @@ export default function Menu(props){
           {mapMenu()}
         </ul>
         { !isAuth ?
-          <Link to={'/administrador'}>Login</Link> :
-          <a href="/" onClick={deslogar}>Deslogar</a>    
+          <Link className='login' to={'/administrador'}>Login</Link> :
+          <a className='login' href="/" onClick={deslogar}>Deslogar</a>    
         } 
+        
       </nav>
         </div>
         

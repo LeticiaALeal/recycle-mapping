@@ -28,10 +28,10 @@ export default function Detalhes () {
         <div>
         {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={50}/> :
             <section className="container">
-                <div className="imagem">
+                <div className="imagemDetalhe">
                     <img src={cooperativa.foto} alt={"cooperativa " + cooperativa.nome}/>
                 </div>
-                <div className="description">
+                <div className="descriptionDetalhe">
                     <h2>{"Cooperativa " + cooperativa.nome}</h2>
 
                     <p><img className='icon' src={point} alt="icon"/>
