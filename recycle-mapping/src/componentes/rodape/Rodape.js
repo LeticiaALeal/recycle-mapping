@@ -5,7 +5,7 @@ export default function Rodape(){
     return (
         <footer className='footer'>
             <div>
-            <img className='logo' src={logo} alt="logo"/>
+            <a href="/"><img className='logo' src={logo} alt="logo"/></a>
             </div>
         </footer>
     )

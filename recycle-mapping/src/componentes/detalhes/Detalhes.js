@@ -26,7 +26,7 @@ export default function Detalhes () {
 
     return (
         <div>
-        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={50}/> :
+        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={40}/> :
             <section className="container">
                 <div className="imagemDetalhe">
                     <img src={cooperativa.foto} alt={"cooperativa " + cooperativa.nome}/>

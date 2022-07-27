@@ -46,7 +46,7 @@ export default function Menu(props){
         <div>
           <img className='campinas' src={campinas} alt="campinas"/>
            <nav className="menu">
-          <img className='logo' src={logo} alt="logo"/>
+          <a href="/"><img className='logo' src={logo} alt="logo"/></a>
         <ul className="menu__list">
           {mapMenu()}
         </ul>

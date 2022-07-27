@@ -32,7 +32,7 @@ export default function Mapa() {
             <MapContainer
                 center={center}
                 zoom={12}
-                style={{width: '100%', height: '700px'}}  
+                style={{width: '100%', height: '600px'}}  
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

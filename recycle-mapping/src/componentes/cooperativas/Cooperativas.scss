@@ -22,7 +22,7 @@
       background-color: #e4e4e4;
     }
     &__imagem {
-      width: 500px;
+      width: 400px;
       img {
         border-radius: 8px;
         width: 100%;
@@ -38,7 +38,7 @@
     }
     &__titulo {
       h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: bold;
         margin-bottom: 20px;
         color: YellowGreen;
@@ -46,7 +46,7 @@
       }
       p {
         color: #92929d;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         font-weight: 600;
         max-width: 600px;
         margin-bottom: 20px;
@@ -59,19 +59,19 @@
         top:50%;
         position: relative;
         margin-left:-40px; 
-        margin-top: 400px; 
+        margin-top: 300px; 
         height: 600px;
   }
   .busca {
-    height: 50px;
+    height: 40px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    width: 350px;
-    font-size: 18px;
+    width: 250px;
+    font-size: 17px;
     display: flex;
     //float: right;
     margin-bottom: 2%;
-    margin-top: -3%;
+    margin-top: -3.7%;
     position: absolute;
-    margin-left: 100rem;
+    margin-left: 90rem;
   }
