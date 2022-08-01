@@ -23,6 +23,9 @@
   }
   &__imagem {
     width: 400px;
+    @media (max-width: 980) {
+      width: 100%;
+    }
     img {
       border-radius: 8px;
       width: 100%;
