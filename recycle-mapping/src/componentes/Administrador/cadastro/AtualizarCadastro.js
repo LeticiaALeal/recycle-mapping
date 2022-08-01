@@ -1,31 +1,36 @@
 import './Cadastro.scss';
 import { db, storage } from '../../../data/Firebase';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { PulseLoader } from 'react-spinners';
+import BasicModal from '../../modal/BasicModal';
 
-export default function Cadastro(){
+export default function AtualizarCadastro(){
   
   if (!sessionStorage.getItem('autenticado')) window.location = '/';
+
+  var {state} = useLocation();
+  if (state === null ) window.location = '/administrador/cadastro'
  
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   
   const [cooperativa, setCooperativa] = useState({
-    nome: '',
-    endereco: '',
-    latitude: '',
-    longitude: '',
-    qtdColaboradores: '',
-    qtdRejeitos: '',
-    qtdTriagem: '',
-    status: '',
-    foto: ''
+    nome: state.cooperativa.nome,
+    endereco: state.cooperativa.endereco,
+    latitude: state.cooperativa.latitude,
+    longitude: state.cooperativa.longitude,
+    qtdColaboradores: state.cooperativa.qtdColaboradores,
+    qtdRejeitos: state.cooperativa.qtdRejeitos,
+    qtdTriagem: state.cooperativa.qtdTriagem,
+    status: state.cooperativa.status,
   });
 
   const [imagem, setImagem] = useState();
+
+  console.log({imagem});
 
   const cadastroImagem = async () => {
        return await uploadBytes(ref(storage, imagem.name), imagem)
@@ -47,7 +52,7 @@ export default function Cadastro(){
     }
 
   function cadastroCooperativa (urlImagem){
-    setDoc(doc(db, 'cooperativas', String(Math.random())), {
+    setDoc(doc(db, 'cooperativas', state.cooperativa.id), {
       nome: cooperativa.nome,
       endereco: cooperativa.endereco,
       latitude: cooperativa.latitude,
@@ -56,7 +61,7 @@ export default function Cadastro(){
       qtdRejeitos: cooperativa.qtdRejeitos,
       qtdTriagem: cooperativa.qtdTriagem,
       status: cooperativa.status,
-      foto: urlImagem
+      foto: urlImagem === undefined ? state.cooperativa.foto : urlImagem
       })
       .then(function() {
         setCooperativa({
@@ -71,31 +76,34 @@ export default function Cadastro(){
           foto: ''
         });
         setIsLoading(false);
-        alert("Cadastro realizado com sucesso!");
+        alert("Atualização inserida com sucesso!");
         navigate(`/administrador/atualizacao`);
       })
       .catch(function(e) {
         setIsLoading(false);
-        alert("Erro ao realizar cadastro: " + e.messagem);
+        alert("Erro na atualização: " + e.messagem);
       });
   }
 
   const submit = () => {
     setIsLoading(true);
-    cadastroImagem().then((imagem) => {
-      cadastroCooperativa(imagem)
-    });
+    if (imagem === null || imagem === undefined){
+      cadastroCooperativa();
+    } else {
+      cadastroImagem().then((imagem) => {
+        cadastroCooperativa(imagem)
+      });
+    }    
   };
 
     const valueInput = e => setCooperativa({ ...cooperativa, [e.target.name]: e.target.value });
 
     const renderForm = (
-      
         <div className="form">
           <form onSubmit={submit}>
             <div className="container-cadastro">
-              <h3 className='titulo'>Cadastro Cooperativas</h3>
-            <label>Nome </label><br/>
+            <h3 className='titulo'>Atualizar cooperativa</h3>
+              <label>Nome </label><br/>
               <input className='input-texto' 
               type="text" name="nome" id="nome" required 
               value={cooperativa.nome} onChange={valueInput}/>    
@@ -145,9 +153,12 @@ export default function Cadastro(){
             </select>
             </div>
             <div className="container-cadastro">
-              <label>Foto </label><br/>
-              <input className='input-texto' type="file" name="foto" required 
-              onChange={(e) => setImagem(e.target.files[0])}/> 
+              <label>Foto </label><br/>  {
+                imagem === undefined ? 
+                <img className='imagemAtualizar' src={state.cooperativa.foto}></img> :
+                <p>{imagem.name}</p>
+              }             
+             <BasicModal setImagem={setImagem} />
             </div>
             <div className="botao-container">
               <input className='input-texto' type="submit" />
@@ -155,6 +166,7 @@ export default function Cadastro(){
           </form>
         </div>
       );
+
 
       return (
         <>

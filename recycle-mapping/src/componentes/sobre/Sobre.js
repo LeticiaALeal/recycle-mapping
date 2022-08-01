@@ -2,8 +2,9 @@ import './Sobre.scss'
 
 export default function Sobre() {
     return (
+    <section className='secao'>
     <div className='sobreNos'>
-        <div className='texto-sobre'>
+        <div className='sobreNos__texto'>
             <h1>Olá utilizador ...</h1>
             <p> Este sistema foi desenvolvido pela estudante Letícia Leal, aluna do curso Análise e 
                 Desenvolvimento de Sistemas do IFSP campus de Campinas, como proposta de trabalho de
@@ -26,6 +27,7 @@ export default function Sobre() {
             </p>
         </div>
     </div>
+    </section>
 
     );    
 }

@@ -49,7 +49,6 @@ export default function Detalhes () {
                     <p><img className='icon' src={pessoas} alt="icon"/>
                     {"Possuí " + cooperativa.colaboradores + " colaboradores"}</p>
                 </div>
-                <div className='regioes'>teste</div>
             </section> 
         }
        </div>

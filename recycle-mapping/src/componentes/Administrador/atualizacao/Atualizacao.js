@@ -18,9 +18,7 @@ export default function Atualizacao(){
             const getCooperativas = await getDocs(cooperativasCollectionRef);
             const cooperativasList = getCooperativas.docs.map((doc) => ({...doc.data(), id: doc.id }));
             setCooperativas(cooperativasList);
-            setTimeout(() => {
-                setIsLoading(false);
-              }, 2000);
+            setIsLoading(false);
         };
         dadosCooperativas();
     }, []);
@@ -37,7 +35,7 @@ export default function Atualizacao(){
                             <div className="itemAdm__titulo">
                                 <h2>{cooperativa.nome}</h2>
                                 <p>{"Endereço: " + cooperativa.endereco}</p>
-                                <button className='editar' onClick={() => navigate(`/administrador/cadastro`, {state: {cooperativa}} )}>Editar</button>
+                                <button className='editar' onClick={() => navigate(`/administrador/atualizar`, {state: {cooperativa}} )}>Editar</button>
                             </div>
                         </div>
                     </> 

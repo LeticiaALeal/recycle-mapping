@@ -8,6 +8,7 @@ import Rodape from './componentes/rodape/Rodape';
 import Login from './componentes/Administrador/login/Login';
 import Cadastro from './componentes/Administrador/cadastro/Cadastro';
 import Atualizacao from './componentes/Administrador/atualizacao/Atualizacao';
+import AtualizarCadastro from './componentes/Administrador/cadastro/AtualizarCadastro';
   
 export default function AppRouter(){
     return (
@@ -21,6 +22,7 @@ export default function AppRouter(){
                     <Route path='/sobre' element={<Sobre />}/>
                     <Route path='/administrador' element={<Login/>}/>
                     <Route path='/administrador/cadastro' element={<Cadastro/>}/>
+                    <Route path='/administrador/atualizar' element={<AtualizarCadastro/>}/>
                     <Route path='/administrador/atualizacao' element={<Atualizacao/>}/> 
                 </Routes>
                 <Rodape/>

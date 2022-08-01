@@ -8,7 +8,6 @@
       margin-left: 200px;
       margin-top: 40px;
   }
-
 .item {
     align-items: center;
     border-radius: 10px;
@@ -23,6 +22,9 @@
     }
     &__imagem {
       width: 400px;
+      @media (max-width: 980) {
+        width: 100%;
+      }
       img {
         border-radius: 8px;
         width: 100%;
@@ -35,6 +37,11 @@
       flex-wrap: wrap;
       justify-content: space-around;
       margin: 0 20px;
+      @media (max-width: 980) {
+        flex-direction: row;
+        margin-top: 20px;
+        padding: 0;
+      }
     }
     &__titulo {
       h2 {
