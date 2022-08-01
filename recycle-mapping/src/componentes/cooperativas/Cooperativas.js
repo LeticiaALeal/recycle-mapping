@@ -35,7 +35,7 @@ export default function Cooperativas () {
             onChange={(evento) => setBusca(evento.target.value)}
             placeholder="Busca..."/>   
             
-        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={50} /> :
+        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={40} /> :
             <section className="secao">    
             {cooperativas.map(cooperativa => (
                 <div className="item"

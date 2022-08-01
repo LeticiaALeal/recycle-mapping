@@ -20,6 +20,7 @@ export default function Home() {
     return (
         <div>    
           <Mapa/>
+          <section className='secao'>
           <div className='fotosAleatoria'>
             {cooperativas.map(item => (
               <div className='aleatoria'>
@@ -31,6 +32,7 @@ export default function Home() {
               
             ))}
           </div>
+          </section>
         </div>
       );
 

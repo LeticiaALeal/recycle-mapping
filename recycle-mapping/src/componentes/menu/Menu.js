@@ -2,6 +2,7 @@ import './Menu.scss'
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo-1.png';
 import campinas from '../../assets/campinas00.jpg';
+import { getAuth, signOut } from "firebase/auth";
 
 export default function Menu(props){
 
@@ -23,6 +24,7 @@ export default function Menu(props){
       }] 
 
       var isAuth = sessionStorage.getItem('autenticado');
+      const auth = getAuth();
 
       function mapMenu(){
         if (!isAuth){
@@ -38,15 +40,20 @@ export default function Menu(props){
       }  
 
       function deslogar(){
-        sessionStorage.removeItem('autenticado');
-        window.location.reload();
+        signOut(auth).then(() => {
+          sessionStorage.removeItem('autenticado');
+          window.location.reload();
+        }).catch((error) => {
+          alert("Erro ao deslogar: " + error)
+        });
+        
       }
 
       return (
         <div>
           <img className='campinas' src={campinas} alt="campinas"/>
            <nav className="menu">
-          <img className='logo' src={logo} alt="logo"/>
+          <a href="/"><img className='logo' src={logo} alt="logo"/></a>
         <ul className="menu__list">
           {mapMenu()}
         </ul>

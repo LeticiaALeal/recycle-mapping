@@ -15,7 +15,6 @@ const mapPinIcon = Leaflet.icon({
     iconSize: [20, 68],
     });
 
-
 export default function Mapa() {
     const [cooperativas, setCooperativas] = useState([]);
     const navigate = useNavigate();
@@ -32,7 +31,7 @@ export default function Mapa() {
             <MapContainer
                 center={center}
                 zoom={12}
-                style={{width: '100%', height: '700px'}}  
+                style={{width: '100%', height: '680px'}}  
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -43,7 +42,7 @@ export default function Mapa() {
                    <div
                    onClick={() => navigate(`/cooperativa/${item.id}`)}
                    >
-                    <Marker position={[item.latitude, item.longitude]} icon={mapPinIcon}>
+                    <Marker position={[item.latitude, item.longitude]} icon={mapPinIcon} >
                     <Popup>
                     {<img src={item.foto} alt="foto da cooperativa" height="150px" width="250px" />}<br />
                     {"Cooperativa "+ item.nome}<br />
@@ -58,6 +57,4 @@ export default function Mapa() {
             </MapContainer>
         </div>
        );
-
-
 }

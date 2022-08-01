@@ -1,9 +1,9 @@
 import './Login.scss';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
-const Login = (props) => {
+const Login = () => {
     const [form, setForm] = useState({
         email:'',
         senha:''
@@ -12,19 +12,18 @@ const Login = (props) => {
       const auth = getAuth();
       const navigate = useNavigate();
 
-      function handleSubmit (){
+      function handleSubmit () {
         signInWithEmailAndPassword(auth, form.email, form.senha)
-          .then(
-            sessionStorage.setItem('autenticado', true), 
-            //navigate(`/administrador/atualizacao`),  
-                               
-          )
+          .then( sessionStorage.setItem('autenticado', true) )
           .catch((error) => {
-            const errorCode = error.code;
             const errorMessage = error.message;
             alert(errorMessage);
-          });
+          });        
       }
+
+      useEffect(() => { 
+          if (sessionStorage.getItem('autenticado')) navigate(`/administrador/atualizacao`);
+        },);
 
       const renderForm = (
         <div className="form">

@@ -1,5 +1,5 @@
 import { db } from '../Firebase';
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs} from 'firebase/firestore'
 
 function getReferanceData(getList, ref){ 
     return getList.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
