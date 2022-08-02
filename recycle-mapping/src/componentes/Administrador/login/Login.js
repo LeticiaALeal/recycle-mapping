@@ -1,7 +1,9 @@
 import './Login.scss';
 import React, { useState, useEffect } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../../data/Firebase';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const Login = () => {
     const [form, setForm] = useState({
@@ -9,15 +11,18 @@ const Login = () => {
         senha:''
       });
 
-      const auth = getAuth();
+      //const auth = getAuth();
       const navigate = useNavigate();
 
       function handleSubmit () {
         signInWithEmailAndPassword(auth, form.email, form.senha)
-          .then( sessionStorage.setItem('autenticado', true) )
+          .then( 
+            sessionStorage.setItem('autenticado', true) 
+            )
           .catch((error) => {
             const errorMessage = error.message;
-            alert(errorMessage);
+            swal("Erro!", "Falha na autenticação: \n" + errorMessage, "error");
+
           });        
       }
 

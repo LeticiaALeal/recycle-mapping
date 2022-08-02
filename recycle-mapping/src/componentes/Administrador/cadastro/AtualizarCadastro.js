@@ -6,6 +6,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { PulseLoader } from 'react-spinners';
 import BasicModal from '../../modal/BasicModal';
+import swal from 'sweetalert';
 
 export default function AtualizarCadastro(){
   
@@ -30,8 +31,6 @@ export default function AtualizarCadastro(){
 
   const [imagem, setImagem] = useState();
 
-  console.log({imagem});
-
   const cadastroImagem = async () => {
        return await uploadBytes(ref(storage, imagem.name), imagem)
       .then(async () => {
@@ -41,13 +40,13 @@ export default function AtualizarCadastro(){
         })
         .catch((e) => {
           setIsLoading(false);
-          alert("Erro ao capiturar url da imagem: " + e.messagem)
+          swal("Erro!", "Erro ao capiturar url da imagem: \n" + e.messagem, "error");
         })
         return resultado;
   })
       .catch((e) => {
         setIsLoading(false);
-        alert("Erro ao salvar imagem: " + e.messagem);
+        swal("Erro!", "Erro ao salvar imagem: \n" + e.messagem, "error");
       });
     }
 
@@ -76,12 +75,12 @@ export default function AtualizarCadastro(){
           foto: ''
         });
         setIsLoading(false);
-        alert("Atualização inserida com sucesso!");
+        swal("Atualizado!", "Cooperativa atualizada com sucesso", "success");
         navigate(`/administrador/atualizacao`);
       })
       .catch(function(e) {
         setIsLoading(false);
-        alert("Erro na atualização: " + e.messagem);
+        swal("Erro!", "Erro ao atualizar cooperativa: \n" + e.messagem, "error");
       });
   }
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/logo-1.png';
 import campinas from '../../assets/campinas00.jpg';
 import { getAuth, signOut } from "firebase/auth";
+import swal from 'sweetalert';
 
 export default function Menu(props){
 
@@ -44,7 +45,7 @@ export default function Menu(props){
           sessionStorage.removeItem('autenticado');
           window.location.reload();
         }).catch((error) => {
-          alert("Erro ao deslogar: " + error)
+          swal("Erro!", "Falha ao deslogar: \n" + error.message, "error");
         });
         
       }

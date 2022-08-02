@@ -1,6 +1,6 @@
 import './Detalhes.scss';
 import { useParams } from 'react-router-dom';
-import { getCooperativas } from '../../data/commands/Cooperativas';
+import { getCooperativas } from '../../data/commands/CooperativasAtivas';
 import { useState, useEffect } from 'react';
 import point from '../../assets/icon-pointer.png';
 import calendario from '../../assets/icon-calendar.png';
@@ -35,7 +35,7 @@ export default function Detalhes () {
                     <h2>{"Cooperativa " + cooperativa.nome}</h2>
 
                     <p><img className='icon' src={point} alt="icon"/>
-                    {cooperativa.rua + ", " + cooperativa.bairro}</p>
+                    {cooperativa.endereco}</p>
 
                     <p><img className='icon' src={calendario} alt="icon"/>
                     {"Início das operações na " + cooperativa.inicio}</p>
