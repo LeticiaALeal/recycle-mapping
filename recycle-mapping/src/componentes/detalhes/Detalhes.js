@@ -38,7 +38,7 @@ export default function Detalhes () {
                     {cooperativa.endereco}</p>
 
                     <p><img className='icon' src={calendario} alt="icon"/>
-                    {"Início das operações na " + cooperativa.inicio}</p>
+                    {"Início das operações na " + cooperativa.dataInicio}</p>
 
                     <p><img className='icon' src={reciclagem} alt="icon"/>
                     {cooperativa.triagem + " toneladas de triagem realizadas por mês"}</p>

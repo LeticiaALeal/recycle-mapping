@@ -23,6 +23,7 @@ export default function AtualizarCadastro(){
     endereco: state.cooperativa.endereco,
     latitude: state.cooperativa.latitude,
     longitude: state.cooperativa.longitude,
+    dataInicio: state.cooperativa.dataInicio,
     qtdColaboradores: state.cooperativa.qtdColaboradores,
     qtdRejeitos: state.cooperativa.qtdRejeitos,
     qtdTriagem: state.cooperativa.qtdTriagem,
@@ -56,6 +57,7 @@ export default function AtualizarCadastro(){
       endereco: cooperativa.endereco,
       latitude: cooperativa.latitude,
       longitude: cooperativa.longitude,
+      dataInicio: cooperativa.dataInicio,
       qtdColaboradores: cooperativa.qtdColaboradores,
       qtdRejeitos: cooperativa.qtdRejeitos,
       qtdTriagem: cooperativa.qtdTriagem,
@@ -68,6 +70,7 @@ export default function AtualizarCadastro(){
           endereco: '',
           latitude: '',
           longitude: '',
+          dataInicio: '',
           qtdColaboradores: '',
           qtdRejeitos: '',
           qtdTriagem: '',
@@ -124,6 +127,12 @@ export default function AtualizarCadastro(){
               <input className='input-texto' 
               type="text" name="longitude" required 
               value={cooperativa.longitude} onChange={valueInput}/> 
+            </div>
+            <div className="container-cadastro">
+              <label>Início das operações </label><br/>
+              <input className='input-texto' 
+              type="text" name="dataInicio" required 
+              value={cooperativa.dataInicio} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
               <label>Quantidade colaboradores </label><br/>

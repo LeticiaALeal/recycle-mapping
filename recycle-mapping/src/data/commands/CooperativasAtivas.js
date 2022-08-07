@@ -18,7 +18,7 @@ const getCooperativas = async () => {
             latitude: it.latitude,
             longitude: it.longitude,                        
             endereco: it.endereco,
-            inicio: it.dataInicio,
+            dataInicio: it.dataInicio,
             colaboradores: it.qtdColaboradores,
             rejeitos: it.qtdRejeitos,
             triagem: it.qtdTriagem,
