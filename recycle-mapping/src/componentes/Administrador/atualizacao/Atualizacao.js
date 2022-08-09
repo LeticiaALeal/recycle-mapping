@@ -28,13 +28,13 @@ export default function Atualizacao(){
         {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={40}/> : 
             <section className="secaoAdm">
             {cooperativas.map(cooperativa => (
-            
                 <div className="itemAdm" >
                     <>
                         <div className="itemAdm__descricao">
                             <div className="itemAdm__titulo">
                                 <h2>{cooperativa.nome}</h2>
                                 <p>{"Endereço: " + cooperativa.endereco}</p>
+                                <p>{"Status: "}  {cooperativa.status === true || cooperativa.status === 'true' ? "Ativa"  : "Inativa"}</p>
                                 <button className='editar' onClick={() => navigate(`/administrador/atualizar`, {state: {cooperativa}} )}>Editar</button>
                             </div>
                         </div>

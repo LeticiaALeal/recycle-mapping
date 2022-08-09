@@ -1,5 +1,5 @@
 import './Cooperativas.scss';
-import { getCooperativas } from '../../data/commands/Cooperativas';
+import { getCooperativas } from '../../data/commands/CooperativasAtivas';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PulseLoader } from 'react-spinners';
@@ -17,7 +17,8 @@ export default function Cooperativas () {
 
     useEffect(() => {
         const dadosCooperativas = async () => {   
-            const cooperativasList = await (await getCooperativas()).filter(item => executaBusca(item.nome));
+            const cooperativasList = await (await getCooperativas())
+            .filter(item => executaBusca(item.nome) || executaBusca(item.endereco))
             setCooperativas(cooperativasList);
             setTimeout(() => {
                 setIsLoading(false);
@@ -48,8 +49,8 @@ export default function Cooperativas () {
                         <div className="item__descricao">
                             <div className="item__titulo">
                                 <h2>{cooperativa.nome}</h2>
-                                <p>{cooperativa.rua + ", " + cooperativa.bairro}</p>
-                                <p>{cooperativa.triagem + " toneladas por mês de tragem" }</p>
+                                <p>{cooperativa.endereco}</p>
+                                <p>{cooperativa.triagem + " toneladas por mês de triagem" }</p>
                             </div>
                         </div>
                     </> 

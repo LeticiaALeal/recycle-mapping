@@ -1,23 +1,30 @@
 import './Login.scss';
 import React, { useState, useEffect } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../../data/Firebase';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
-const Login = () => {
+const Login = (props) => {
     const [form, setForm] = useState({
         email:'',
         senha:''
       });
 
-      const auth = getAuth();
       const navigate = useNavigate();
 
-      function handleSubmit () {
+      function handleSubmit (event) {
+        event.preventDefault();
         signInWithEmailAndPassword(auth, form.email, form.senha)
-          .then( sessionStorage.setItem('autenticado', true) )
+          .then( (userCredential) => {
+            const user = userCredential.user
+            sessionStorage.setItem('autenticado', true) 
+            props.setIsAuth(true)                               
+          })
           .catch((error) => {
             const errorMessage = error.message;
-            alert(errorMessage);
+            swal("Erro!", "Falha na autenticação: \n" + errorMessage, "error");
+
           });        
       }
 

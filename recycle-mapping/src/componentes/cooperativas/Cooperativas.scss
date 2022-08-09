@@ -82,3 +82,15 @@
     position: absolute;
     margin-left: 90rem;
   }
+  .containerCooperativas {
+    padding: 50px 250px;
+    @media (max-width: 980) {
+      padding: 50px 100px;
+    }
+    @media (min-width: 980) and (max-width: 1080) {
+      padding: 50px 150px;
+    }
+    @media (min-width: 1080) and (max-width: 1280px) {
+      padding: 50px 200px;
+    }
+  }

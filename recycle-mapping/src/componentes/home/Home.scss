@@ -26,6 +26,16 @@
         cursor: pointer;
       }
     }
+    &__titulo {
+      h2 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-left: 1%;
+        color: YellowGreen;
+        font-family: 'Courier New', Courier, monospace;
+      }
+    }
   }
   .campinas {
     width: 100%;

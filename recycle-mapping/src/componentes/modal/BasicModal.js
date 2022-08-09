@@ -37,7 +37,6 @@ export default function BasicModal(props) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <input  className='input-texto' type="file" name="foto"  
               onChange={(e) => {
-                console.log('chamanbdo  botao');
                 props.setImagem(e.target.files[0]);
                 setOpen(false);
               }               

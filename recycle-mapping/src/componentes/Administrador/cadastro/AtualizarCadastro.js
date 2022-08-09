@@ -6,6 +6,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { PulseLoader } from 'react-spinners';
 import BasicModal from '../../modal/BasicModal';
+import swal from 'sweetalert';
 
 export default function AtualizarCadastro(){
   
@@ -22,6 +23,7 @@ export default function AtualizarCadastro(){
     endereco: state.cooperativa.endereco,
     latitude: state.cooperativa.latitude,
     longitude: state.cooperativa.longitude,
+    dataInicio: state.cooperativa.dataInicio,
     qtdColaboradores: state.cooperativa.qtdColaboradores,
     qtdRejeitos: state.cooperativa.qtdRejeitos,
     qtdTriagem: state.cooperativa.qtdTriagem,
@@ -29,8 +31,6 @@ export default function AtualizarCadastro(){
   });
 
   const [imagem, setImagem] = useState();
-
-  console.log({imagem});
 
   const cadastroImagem = async () => {
        return await uploadBytes(ref(storage, imagem.name), imagem)
@@ -41,13 +41,13 @@ export default function AtualizarCadastro(){
         })
         .catch((e) => {
           setIsLoading(false);
-          alert("Erro ao capiturar url da imagem: " + e.messagem)
+          swal("Erro!", "Erro ao capiturar url da imagem: \n" + e.messagem, "error");
         })
         return resultado;
   })
       .catch((e) => {
         setIsLoading(false);
-        alert("Erro ao salvar imagem: " + e.messagem);
+        swal("Erro!", "Erro ao salvar imagem: \n" + e.messagem, "error");
       });
     }
 
@@ -57,6 +57,7 @@ export default function AtualizarCadastro(){
       endereco: cooperativa.endereco,
       latitude: cooperativa.latitude,
       longitude: cooperativa.longitude,
+      dataInicio: cooperativa.dataInicio,
       qtdColaboradores: cooperativa.qtdColaboradores,
       qtdRejeitos: cooperativa.qtdRejeitos,
       qtdTriagem: cooperativa.qtdTriagem,
@@ -69,6 +70,7 @@ export default function AtualizarCadastro(){
           endereco: '',
           latitude: '',
           longitude: '',
+          dataInicio: '',
           qtdColaboradores: '',
           qtdRejeitos: '',
           qtdTriagem: '',
@@ -76,12 +78,12 @@ export default function AtualizarCadastro(){
           foto: ''
         });
         setIsLoading(false);
-        alert("Atualização inserida com sucesso!");
+        swal("Atualizado!", "Cooperativa atualizada com sucesso", "success");
         navigate(`/administrador/atualizacao`);
       })
       .catch(function(e) {
         setIsLoading(false);
-        alert("Erro na atualização: " + e.messagem);
+        swal("Erro!", "Erro ao atualizar cooperativa: \n" + e.messagem, "error");
       });
   }
 
@@ -125,6 +127,12 @@ export default function AtualizarCadastro(){
               <input className='input-texto' 
               type="text" name="longitude" required 
               value={cooperativa.longitude} onChange={valueInput}/> 
+            </div>
+            <div className="container-cadastro">
+              <label>Início das operações </label><br/>
+              <input className='input-texto' 
+              type="text" name="dataInicio" required 
+              value={cooperativa.dataInicio} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
               <label>Quantidade colaboradores </label><br/>

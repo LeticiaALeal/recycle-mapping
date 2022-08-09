@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { PulseLoader } from 'react-spinners';
+import swal from 'sweetalert';
 
 export default function Cadastro(){
   
@@ -18,10 +19,11 @@ export default function Cadastro(){
     endereco: '',
     latitude: '',
     longitude: '',
+    dataInicio: '',
     qtdColaboradores: '',
     qtdRejeitos: '',
     qtdTriagem: '',
-    status: '',
+    status: true,
     foto: ''
   });
 
@@ -36,13 +38,13 @@ export default function Cadastro(){
         })
         .catch((e) => {
           setIsLoading(false);
-          alert("Erro ao capiturar url da imagem: " + e.messagem)
+          swal("Erro!", "Erro ao capiturar url da imagem: \n" + e.messagem, "error");
         })
         return resultado;
   })
       .catch((e) => {
         setIsLoading(false);
-        alert("Erro ao salvar imagem: " + e.messagem);
+        swal("Erro!", "Erro ao salvar imagem: \n" + e.messagem, "error");
       });
     }
 
@@ -52,6 +54,7 @@ export default function Cadastro(){
       endereco: cooperativa.endereco,
       latitude: cooperativa.latitude,
       longitude: cooperativa.longitude,
+      dataInicio: cooperativa.dataInicio,
       qtdColaboradores: cooperativa.qtdColaboradores,
       qtdRejeitos: cooperativa.qtdRejeitos,
       qtdTriagem: cooperativa.qtdTriagem,
@@ -64,6 +67,7 @@ export default function Cadastro(){
           endereco: '',
           latitude: '',
           longitude: '',
+          dataInicio: '',
           qtdColaboradores: '',
           qtdRejeitos: '',
           qtdTriagem: '',
@@ -71,15 +75,15 @@ export default function Cadastro(){
           foto: ''
         });
         setIsLoading(false);
-        alert("Cadastro realizado com sucesso!");
+        swal("Cadastrado!", "Cooperativa cadastrada com sucesso", "success");
         navigate(`/administrador/atualizacao`);
       })
       .catch(function(e) {
         setIsLoading(false);
-        alert("Erro ao realizar cadastro: " + e.messagem);
+        swal("Erro!", "Erro ao cadastrar cooperativa: \n" + e.messagem, "error");
       });
   }
-
+  
   const submit = () => {
     setIsLoading(true);
     cadastroImagem().then((imagem) => {
@@ -117,6 +121,12 @@ export default function Cadastro(){
               <input className='input-texto' 
               type="text" name="longitude" required 
               value={cooperativa.longitude} onChange={valueInput}/> 
+            </div>
+            <div className="container-cadastro">
+              <label>Início das operações </label><br/>
+              <input className='input-texto' 
+              type="text" name="dataInicio" required 
+              value={cooperativa.dataInicio} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
               <label>Quantidade colaboradores </label><br/>

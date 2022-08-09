@@ -3,7 +3,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import Leaflet from "leaflet";
 import mapPin from '../../../assets/icon-reciclage.svg';
 import { useState, useEffect } from 'react';
-import { getCooperativas } from '../../../data/commands/Cooperativas';
+import { getCooperativas } from '../../../data/commands/CooperativasAtivas';
 import { useNavigate } from 'react-router-dom';
 import './Mapa.scss';
 import 'leaflet/dist/leaflet.css';
@@ -31,7 +31,7 @@ export default function Mapa() {
             <MapContainer
                 center={center}
                 zoom={12}
-                style={{width: '100%', height: '680px'}}  
+                style={{width: '100%', height: '620px'}}  
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -46,8 +46,7 @@ export default function Mapa() {
                     <Popup>
                     {<img src={item.foto} alt="foto da cooperativa" height="150px" width="250px" />}<br />
                     {"Cooperativa "+ item.nome}<br />
-                    {item.rua + ", "} {item.numero}<br />
-                    {item.bairro}<br />
+                    {item.endereco}
                     </Popup>
                     </Marker>
                     </div> 

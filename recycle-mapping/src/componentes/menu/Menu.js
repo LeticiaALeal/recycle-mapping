@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/logo-1.png';
 import campinas from '../../assets/campinas00.jpg';
 import { getAuth, signOut } from "firebase/auth";
+import { Component, useState } from 'react';
+import swal from 'sweetalert';
+import Login from '../Administrador/login/Login';
+
 
 export default function Menu(props){
 
@@ -23,11 +27,10 @@ export default function Menu(props){
         to: '/administrador/cadastro'
       }] 
 
-      var isAuth = sessionStorage.getItem('autenticado');
       const auth = getAuth();
 
       function mapMenu(){
-        if (!isAuth){
+        if (!props.isAuth){
           rotas = rotas.filter(it => !it.to.includes('/administrador'))
         }
         return rotas.map((rota, index) => (
@@ -44,7 +47,7 @@ export default function Menu(props){
           sessionStorage.removeItem('autenticado');
           window.location.reload();
         }).catch((error) => {
-          alert("Erro ao deslogar: " + error)
+          swal("Erro!", "Falha ao deslogar: \n" + error.message, "error");
         });
         
       }
@@ -57,7 +60,7 @@ export default function Menu(props){
         <ul className="menu__list">
           {mapMenu()}
         </ul>
-        { !isAuth ?
+        { !props.isAuth ?
           <Link className='login' to={'/administrador'}>Login</Link> :
           <a className='login' href="/" onClick={deslogar}>Deslogar</a>    
         } 
