@@ -1,7 +1,9 @@
 import './Login.scss';
-import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState, useEffect } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../../data/Firebase';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const Login = (props) => {
     const [form, setForm] = useState({
@@ -9,22 +11,26 @@ const Login = (props) => {
         senha:''
       });
 
-      const auth = getAuth();
       const navigate = useNavigate();
 
-      function handleSubmit (){
+      function handleSubmit (event) {
+        event.preventDefault();
         signInWithEmailAndPassword(auth, form.email, form.senha)
-          .then(
-            sessionStorage.setItem('autenticado', true), 
-            //navigate(`/administrador/atualizacao`),  
-                               
-          )
+          .then( (userCredential) => {
+            const user = userCredential.user
+            sessionStorage.setItem('autenticado', true) 
+            props.setIsAuth(true)                               
+          })
           .catch((error) => {
-            const errorCode = error.code;
             const errorMessage = error.message;
-            alert(errorMessage);
-          });
+            swal("Erro!", "Falha na autenticação: \n" + errorMessage, "error");
+
+          });        
       }
+
+      useEffect(() => { 
+          if (sessionStorage.getItem('autenticado')) navigate(`/administrador/atualizacao`);
+        },);
 
       const renderForm = (
         <div className="form">

@@ -18,26 +18,24 @@ export default function Atualizacao(){
             const getCooperativas = await getDocs(cooperativasCollectionRef);
             const cooperativasList = getCooperativas.docs.map((doc) => ({...doc.data(), id: doc.id }));
             setCooperativas(cooperativasList);
-            setTimeout(() => {
-                setIsLoading(false);
-              }, 2000);
+            setIsLoading(false);
         };
         dadosCooperativas();
     }, []);
 
     return (
         <>
-        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={50}/> : 
+        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={40}/> : 
             <section className="secaoAdm">
             {cooperativas.map(cooperativa => (
-            
-                <div className="item" >
+                <div className="itemAdm" >
                     <>
-                        <div className="item__descricao">
-                            <div className="item__titulo">
+                        <div className="itemAdm__descricao">
+                            <div className="itemAdm__titulo">
                                 <h2>{cooperativa.nome}</h2>
                                 <p>{"Endereço: " + cooperativa.endereco}</p>
-                                <button className='editar' onClick={() => navigate(`/administrador/cadastro`, {state: {cooperativa}} )}>Editar</button>
+                                <p>{"Status: "}  {cooperativa.status === true || cooperativa.status === 'true' ? "Ativa"  : "Inativa"}</p>
+                                <button className='editar' onClick={() => navigate(`/administrador/atualizar`, {state: {cooperativa}} )}>Editar</button>
                             </div>
                         </div>
                     </> 

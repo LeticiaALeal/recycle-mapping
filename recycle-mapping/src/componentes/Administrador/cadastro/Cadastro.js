@@ -1,54 +1,65 @@
 import './Cadastro.scss';
 import { db, storage } from '../../../data/Firebase';
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { PulseLoader } from 'react-spinners';
+import swal from 'sweetalert';
 
 export default function Cadastro(){
   
   if (!sessionStorage.getItem('autenticado')) window.location = '/';
-
+ 
   const navigate = useNavigate();
-
-  var {state} = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
+  
   const [cooperativa, setCooperativa] = useState({
-    nome: state === null ? '' : state.cooperativa.nome,
-    endereco: state === null ? '' : state.cooperativa.endereco,
-    latitude: state === null ? '' : state.cooperativa.latitude,
-    longitude: state === null ? '' : state.cooperativa.longitude,
-    qtdColaboradores: state === null ? '' : state.cooperativa.qtdColaboradores,
-    qtdRejeitos: state === null ? '' : state.cooperativa.qtdRejeitos,
-    qtdTriagem: state === null ? '' : state.cooperativa.qtdTriagem,
-    status: state === null ? true : state.cooperativa.status,
-    foto: state === null ? '' : state.cooperativa.foto
+    nome: '',
+    endereco: '',
+    latitude: '',
+    longitude: '',
+    dataInicio: '',
+    qtdColaboradores: '',
+    qtdRejeitos: '',
+    qtdTriagem: '',
+    status: true,
+    foto: ''
   });
 
   const [imagem, setImagem] = useState();
 
-  const submit = (e) => {
-    e.preventDefault();
+  const cadastroImagem = async () => {
+       return await uploadBytes(ref(storage, imagem.name), imagem)
+      .then(async () => {
+        const resultado = await getDownloadURL(ref(storage, imagem.name))
+        .then((item) => { 
+          return item
+        })
+        .catch((e) => {
+          setIsLoading(false);
+          swal("Erro!", "Erro ao capiturar url da imagem: \n" + e.messagem, "error");
+        })
+        return resultado;
+  })
+      .catch((e) => {
+        setIsLoading(false);
+        swal("Erro!", "Erro ao salvar imagem: \n" + e.messagem, "error");
+      });
+    }
 
-    uploadBytes(ref(storage, imagem.name), imagem)
-    .catch(() => {
-      alert("Erro ao salvar imagem: " + e.messagem);
-    });
-
-    // getDownloadURL(ref(storage, imagem.name))
-    // .then((url) => {
-    //   console.log(url);
-    // });
-
-     setDoc(doc(db, 'cooperativas', state === null ? String(Math.random()) : state.cooperativa.id), {
+  function cadastroCooperativa (urlImagem){
+    setDoc(doc(db, 'cooperativas', String(Math.random())), {
       nome: cooperativa.nome,
       endereco: cooperativa.endereco,
       latitude: cooperativa.latitude,
       longitude: cooperativa.longitude,
+      dataInicio: cooperativa.dataInicio,
       qtdColaboradores: cooperativa.qtdColaboradores,
       qtdRejeitos: cooperativa.qtdRejeitos,
       qtdTriagem: cooperativa.qtdTriagem,
       status: cooperativa.status,
-      foto: ""
+      foto: urlImagem
       })
       .then(function() {
         setCooperativa({
@@ -56,95 +67,116 @@ export default function Cadastro(){
           endereco: '',
           latitude: '',
           longitude: '',
+          dataInicio: '',
           qtdColaboradores: '',
           qtdRejeitos: '',
           qtdTriagem: '',
           status: true,
           foto: ''
         });
-        alert("Atualização inserida com sucesso!");
+        setIsLoading(false);
+        swal("Cadastrado!", "Cooperativa cadastrada com sucesso", "success");
         navigate(`/administrador/atualizacao`);
       })
       .catch(function(e) {
-        alert("Erro na atualização: " + e.messagem);
+        setIsLoading(false);
+        swal("Erro!", "Erro ao cadastrar cooperativa: \n" + e.messagem, "error");
       });
-    };
+  }
+  
+  const submit = () => {
+    setIsLoading(true);
+    cadastroImagem().then((imagem) => {
+      cadastroCooperativa(imagem)
+    });
+  };
 
     const valueInput = e => setCooperativa({ ...cooperativa, [e.target.name]: e.target.value });
 
     const renderForm = (
+      
         <div className="form">
-          <form>
+          <form onSubmit={submit}>
             <div className="container-cadastro">
-              <label>Nome </label>
+              <h3 className='titulo'>Cadastro Cooperativas</h3>
+            <label>Nome </label><br/>
               <input className='input-texto' 
               type="text" name="nome" id="nome" required 
               value={cooperativa.nome} onChange={valueInput}/>    
             </div>
             <div className="container-cadastro">
-              <label>Endereço </label>
+              <label>Endereço </label><br/>
               <input className='input-texto' 
               type="text" name="endereco" required 
               value={cooperativa.endereco} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
-              <label>Latitude </label>
+              <label>Latitude </label><br/>
               <input className='input-texto' 
               type="text" name="latitude" required 
               value={cooperativa.latitude} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
-              <label>Longitude </label>
+              <label>Longitude </label><br/>
               <input className='input-texto' 
               type="text" name="longitude" required 
               value={cooperativa.longitude} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
-              <label>Quantidade colaboradores </label>
+              <label>Início das operações </label><br/>
+              <input className='input-texto' 
+              type="text" name="dataInicio" required 
+              value={cooperativa.dataInicio} onChange={valueInput}/> 
+            </div>
+            <div className="container-cadastro">
+              <label>Quantidade colaboradores </label><br/>
               <input className='input-texto' 
               type="text" name="qtdColaboradores" required 
               value={cooperativa.qtdColaboradores} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
-              <label>Quantidade rejeitos </label>
+              <label>Quantidade rejeitos </label><br/>
               <input className='input-texto' 
               type="text" name="qtdRejeitos" required 
               value={cooperativa.qtdRejeitos} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
-              <label>Quantidade triagem </label>
+              <label>Quantidade triagem </label><br/>
               <input className='input-texto' 
               type="text" name="qtdTriagem" required 
               value={cooperativa.qtdTriagem} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
-            <label>Status </label>
-            <select className='input-texto' id="status" name="status" 
+            <label>Status </label><br/>
+            <select className='input-texto' id="status" name="status" required
             value={cooperativa.status} onChange={valueInput}>
               <option value={true}>Ativa</option>
               <option value={false}>Inativa</option>
             </select>
             </div>
             <div className="container-cadastro">
-              <label>Foto </label>
-              <input className='input-texto' type="file" name="foto" 
-              accept="image/png, image/jpeg" required 
+              <label>Foto </label><br/>
+              <input className='input-texto' type="file" name="foto" required 
               onChange={(e) => setImagem(e.target.files[0])}/> 
             </div>
             <div className="botao-container">
-              <input className='input-texto' type="submit" onClick={submit}/>
+              <input className='input-texto' type="submit" />
             </div>
           </form>
         </div>
       );
 
       return (
+        <>
+        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={40}/> :
+        
         <div className="tela">
           <div className="cadastro-form">
-            <div className="titulo">Cadastro da cooperativa</div>
             {renderForm}
           </div>
         </div>
+        }
+        </>
       );
 
 }

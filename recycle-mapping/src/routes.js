@@ -8,19 +8,23 @@ import Rodape from './componentes/rodape/Rodape';
 import Login from './componentes/Administrador/login/Login';
 import Cadastro from './componentes/Administrador/cadastro/Cadastro';
 import Atualizacao from './componentes/Administrador/atualizacao/Atualizacao';
+import AtualizarCadastro from './componentes/Administrador/cadastro/AtualizarCadastro';
+import { useState } from 'react';
   
 export default function AppRouter(){
+    const [isAuth, setIsAuth] = useState(sessionStorage.getItem('autenticado'));
     return (
-        <main>
+        <main>          
             <Router>
-            <Menu/>
+            <Menu isAuth={isAuth}/>
                 <Routes>
                     <Route path='/' element={<Home />}/>
                     <Route path='/cooperativa/:id' element={<Detalhes/>}/>
                     <Route path='/cooperativas' element={<Cooperativas/>}/>
                     <Route path='/sobre' element={<Sobre />}/>
-                    <Route path='/administrador' element={<Login/>}/>
+                    <Route path='/administrador' element={<Login setIsAuth={setIsAuth}/>}/>
                     <Route path='/administrador/cadastro' element={<Cadastro/>}/>
+                    <Route path='/administrador/atualizar' element={<AtualizarCadastro/>}/>
                     <Route path='/administrador/atualizacao' element={<Atualizacao/>}/> 
                 </Routes>
                 <Rodape/>

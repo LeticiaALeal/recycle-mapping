@@ -3,5 +3,14 @@
     display: flex;
     justify-content: flex-end;
     padding: 10px 250px;
+    @media (max-width: 980) {
+      padding: 10px 100px;
+      }
+      @media (min-width: 980) and (max-width: 1080) {
+      padding: 10px 150px;
+      }
+      @media (min-width: 1080) and (max-width: 1280px) {
+      padding: 10px 200px;
+      }
     
   }

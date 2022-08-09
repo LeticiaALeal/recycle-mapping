@@ -1,6 +1,6 @@
 import './Detalhes.scss';
 import { useParams } from 'react-router-dom';
-import { getCooperativas } from '../../data/commands/Cooperativas';
+import { getCooperativas } from '../../data/commands/CooperativasAtivas';
 import { useState, useEffect } from 'react';
 import point from '../../assets/icon-pointer.png';
 import calendario from '../../assets/icon-calendar.png';
@@ -26,19 +26,19 @@ export default function Detalhes () {
 
     return (
         <div>
-        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={50}/> :
+        {isLoading ? <PulseLoader className='loader' color={'YellowGreen'} size={40}/> :
             <section className="container">
-                <div className="imagem">
+                <div className="imagemDetalhe">
                     <img src={cooperativa.foto} alt={"cooperativa " + cooperativa.nome}/>
                 </div>
-                <div className="description">
+                <div className="descriptionDetalhe">
                     <h2>{"Cooperativa " + cooperativa.nome}</h2>
 
                     <p><img className='icon' src={point} alt="icon"/>
-                    {cooperativa.rua + ", " + cooperativa.bairro}</p>
+                    {cooperativa.endereco}</p>
 
                     <p><img className='icon' src={calendario} alt="icon"/>
-                    {"Início das operações na " + cooperativa.inicio}</p>
+                    {"Início das operações na " + cooperativa.dataInicio}</p>
 
                     <p><img className='icon' src={reciclagem} alt="icon"/>
                     {cooperativa.triagem + " toneladas de triagem realizadas por mês"}</p>
@@ -49,7 +49,6 @@ export default function Detalhes () {
                     <p><img className='icon' src={pessoas} alt="icon"/>
                     {"Possuí " + cooperativa.colaboradores + " colaboradores"}</p>
                 </div>
-                <div className='regioes'>teste</div>
             </section> 
         }
        </div>

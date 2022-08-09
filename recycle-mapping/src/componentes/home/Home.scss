@@ -1,3 +1,11 @@
+.secao {
+  align-items: center;
+  display: block;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: 200px;
+  margin-left: 200px;
+}
 .fotosAleatoria {
     border-radius: 2px;
     display: flex;
@@ -7,30 +15,28 @@
   }
   .aleatoria {
     &__imagem {
-      width: 300px;
-      margin-bottom: 10px;
+      width: 450px;
+      margin-bottom: 60px;
+      padding-right: 6px;
       img {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         border-radius: 8px;
         width: 100%;
+        height: 350px;
+        cursor: pointer;
       }
     }
-    &__botao {
-      background-color: #d73b3b;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-      font-size: 1.2rem;
-      font-weight: bold;
-      padding: 10px 0;
-      transition: .2s ease;
-      width: 100%;
-      &:hover {
-        background-color: #c62a2a;
+    &__titulo {
+      h2 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-left: 1%;
+        color: YellowGreen;
+        font-family: 'Courier New', Courier, monospace;
       }
     }
   }
-
   .campinas {
     width: 100%;
   }
