@@ -101,49 +101,49 @@ export default function Cadastro(){
               <h3 className='titulo'>Cadastro Cooperativas</h3>
             <label>Nome </label><br/>
               <input className='input-texto' 
-              type="text" name="nome" id="nome" required 
+              type="text" name="nome" id="nome" maxlength="50" required 
               value={cooperativa.nome} onChange={valueInput}/>    
             </div>
             <div className="container-cadastro">
               <label>Endereço </label><br/>
               <input className='input-texto' 
-              type="text" name="endereco" required 
+              type="text" name="endereco" maxlength="70" required 
               value={cooperativa.endereco} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
               <label>Latitude </label><br/>
               <input className='input-texto' 
-              type="text" name="latitude" required 
+              type="text" name="latitude" maxlength="20" required 
               value={cooperativa.latitude} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
               <label>Longitude </label><br/>
               <input className='input-texto' 
-              type="text" name="longitude" required 
+              type="text" name="longitude" maxlength="20" required 
               value={cooperativa.longitude} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
               <label>Início das operações </label><br/>
               <input className='input-texto' 
-              type="text" name="dataInicio" required 
+              type="text" name="dataInicio" maxlength="20" required 
               value={cooperativa.dataInicio} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
               <label>Quantidade colaboradores </label><br/>
               <input className='input-texto' 
-              type="text" name="qtdColaboradores" required 
+              type="text" name="qtdColaboradores" maxlength="20" required 
               value={cooperativa.qtdColaboradores} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
               <label>Quantidade rejeitos </label><br/>
               <input className='input-texto' 
-              type="text" name="qtdRejeitos" required 
+              type="text" name="qtdRejeitos" maxlength="20" required 
               value={cooperativa.qtdRejeitos} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">
               <label>Quantidade triagem </label><br/>
               <input className='input-texto' 
-              type="text" name="qtdTriagem" required 
+              type="text" name="qtdTriagem" maxlength="20" required 
               value={cooperativa.qtdTriagem} onChange={valueInput}/> 
             </div>
             <div className="container-cadastro">

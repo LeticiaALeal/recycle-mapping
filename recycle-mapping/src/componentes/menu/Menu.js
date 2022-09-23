@@ -45,7 +45,8 @@ export default function Menu(props){
       function deslogar(){
         signOut(auth).then(() => {
           sessionStorage.removeItem('autenticado');
-          window.location.reload();
+          //window.location.reload();
+          window.location = '/';
         }).catch((error) => {
           swal("Erro!", "Falha ao deslogar: \n" + error.message, "error");
         });
@@ -62,7 +63,7 @@ export default function Menu(props){
         </ul>
         { !props.isAuth ?
           <Link className='login' to={'/administrador'}>Login</Link> :
-          <a className='login' href="/" onClick={deslogar}>Deslogar</a>    
+          <a className='login' href="/" onClick={deslogar}>Logoff</a>    
         } 
         
       </nav>
